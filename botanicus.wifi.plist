@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+   	<key>Label</key>
+   	<string>botanicus.wifi</string>
+
+    <key>ProgramArguments</key>
+   	<array>
+      <string>/Users/botanicus/.scripts/internet-usage-limiter/turn_off_wifi_if_necessary.sh</string>
+   	</array>
+
+    <key>StartInterval</key>
+    <integer>5</integer>
+
+    <key>StandardOutPath</key>
+    <string>/tmp/botanicus.wifi.stdout</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/botanicus.wifi.stderr</string>
+  </dict>
+</plist>
