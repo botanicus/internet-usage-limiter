@@ -3,8 +3,10 @@
 # System Ruby can't manage Range#include? with Time.
 
 require 'time'
+require_relative 'lib/internet-usage-limiter'
 
-log_file = File.join(ENV['HOME'], 'Desktop', 'Internet usage.log')
+log_file_path = InternetUsageLimiter.config.log_file_path ||
+  File.join(ENV['HOME'], 'Desktop', 'Internet usage.log')
 
 def work_internet_usage_period
   unless Time.now.saturday? || Time.now.sunday?
@@ -22,7 +24,7 @@ def personal_internet_usage_period
   end
 end
 
-last_log_entry = File.readlines(log_file).last.split(" ")
+last_log_entry = File.readlines(log_file_path).last.split(" ")
 end_of_the_last_period = Time.parse(last_log_entry[3])
 within_an_active_period = end_of_the_last_period > Time.now
 
