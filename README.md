@@ -1,5 +1,7 @@
 # About
 
+Limit your time online and increase awareness about what you are doing there.
+
 # Installation
 
 ```
