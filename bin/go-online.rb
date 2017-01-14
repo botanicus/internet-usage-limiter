@@ -1,16 +1,15 @@
 #!/usr/bin/env ruby
 
-require_relative 'lib/internet-usage-limiter'
+require 'internet-usage-limiter'
 
 if ARGV.length < 2
-  abort "Usage: #{$0} [time in minutes] [purpouse of the session]"
+  abort "Usage: #{$0} [time in minutes] [purpose of the session]"
 end
 
 minutes = ARGV.shift.to_i
 reason = ARGV.join(" ")
 
-log_file_path = InternetUsageLimiter.config.log_file_path ||
-  File.join(ENV['HOME'], 'Desktop', 'Internet usage.log')
+log_file_path = InternetUsageLimiter.config.log_file_path
 
 from, to = Time.now, Time.now + minutes * 60
 

@@ -7,7 +7,7 @@
 
     <key>ProgramArguments</key>
      <array>
-      <string>/Users/botanicus/.scripts/internet-usage-limiter/turn_off_wifi_if_necessary.sh</string>
+      <string>/Users/botanicus/.scripts/internet-usage-limiter.turn_off_wifi_if_necessary.sh</string>
      </array>
 
     <key>StartInterval</key>
