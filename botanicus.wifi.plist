@@ -2,17 +2,28 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
   <dict>
-     <key>Label</key>
-     <string>botanicus.wifi</string>
+    <key>Label</key>
+    <string>botanicus.wifi</string>
 
+
+    <!--
+      This has to run via ZSH, so the $PATH, $RUBYLIB and everything else works like within a shell session.
+      Common problem is missing other scripts within that repo if this is not done. Even if I set up PATH within
+      the plist to point to the repo, it's one more hardcoded path and it will break the moment I'll move it,
+      so I prefer to have it just in my shell config. (I'm not sure whether launchd reads ~/.profile or something
+      like that for user-space scripts, but I rather doubt so.)
+    -->
     <key>ProgramArguments</key>
-     <array>
-      <string>/Users/botanicus/Dropbox/Projects/Software/internet-usage-limiter/bin/internet-usage-limiter.turn_off_wifi_if_necessary.sh</string>
-     </array>
+    <array>
+      <string>/usr/local/bin/zsh</string>
+      <string>-c</string>
+      <string>internet-usage-limiter.turn_off_wifi_if_necessary.sh</string>
+    </array>
 
     <key>StartInterval</key>
     <integer>5</integer>
 
+    <!-- I don't have permissions to write into /var/log. -->
     <key>StandardOutPath</key>
     <string>/tmp/botanicus.wifi.stdout</string>
     <key>StandardErrorPath</key>
