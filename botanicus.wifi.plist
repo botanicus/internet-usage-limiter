@@ -2,13 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
   <dict>
-   	<key>Label</key>
-   	<string>botanicus.wifi</string>
+     <key>Label</key>
+     <string>botanicus.wifi</string>
 
     <key>ProgramArguments</key>
-   	<array>
+     <array>
       <string>/Users/botanicus/.scripts/internet-usage-limiter/turn_off_wifi_if_necessary.sh</string>
-   	</array>
+     </array>
 
     <key>StartInterval</key>
     <integer>5</integer>
