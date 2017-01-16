@@ -17,7 +17,7 @@ Active work period: #{within_an_active_period} (last: #{end_of_the_last_period})
 internet allowancy period: #{within_the_work_period} (#{InternetUsageLimiter.work_internet_usage_period})
   EOF
 
-  (within_an_active_period && work_internet_usage_period) ? exit(0) : exit(1)
+  (within_an_active_period && within_the_work_period) ? exit(0) : exit(1)
 else
   within_the_internet_allowancy_period = InternetUsageLimiter.personal_internet_usage_period &&
     InternetUsageLimiter.personal_internet_usage_period.member?(Time.now)
