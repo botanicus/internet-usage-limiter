@@ -15,17 +15,20 @@ module InternetUsageLimiter
 
   def self.work_internet_usage_period
     unless Time.now.saturday? || Time.now.sunday?
-      Time.parse('9:30')..Time.parse('14:00')
+      schedule = self.config.work_day_work_schedule
+      Time.parse(schedule[0])..Time.parse(schedule[1])
     end
   end
 
   def self.personal_internet_usage_period
     if Time.now.saturday?
-      Time.parse('9:30')..Time.parse('18:20')
+      schedule = self.config.saturday_schedule
+      Time.parse(schedule[0])..Time.parse(schedule[1])
     elsif Time.now.sunday?
       # none
     else
-      Time.parse('14:00')..Time.parse('18:20')
+      schedule = self.config.work_day_personal_schedule
+      Time.parse(schedule[0])..Time.parse(schedule[1])
     end
   end
 end
