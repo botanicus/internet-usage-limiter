@@ -5,8 +5,8 @@ require 'internet-usage-limiter'
 log_file_path = InternetUsageLimiter.config.log_file_path
 
 last_log_entry = File.readlines(log_file_path).last.split(" ")
-p last_log_entry_with_date = "#{last_log_entry[0]} #{last_log_entry[3]}"
-end_of_the_last_period = Time.parse(last_log_entry[3])
+last_log_entry_with_date = "#{last_log_entry[0]} #{last_log_entry[3]}"
+end_of_the_last_period = Time.parse(last_log_entry_with_date)
 within_an_active_period = end_of_the_last_period > Time.now
 
 if last_log_entry[5] == "Work:"
