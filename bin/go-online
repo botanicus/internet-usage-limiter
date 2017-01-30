@@ -2,12 +2,12 @@
 
 require 'internet-usage-limiter'
 
-if ARGV.length < 2
-  abort "Usage: #{$0} [time in minutes] [purpose of the session]"
+unless (1..2).include?(ARGV.length)
+  abort "Usage: #{$0} [purpose of the session] [time in minutes (defaults to 10)]"
 end
 
-minutes = ARGV.shift.to_i
-reason = ARGV.join(" ")
+reason = ARGV.shift
+minutes = (ARGV.shift || 10).to_i
 
 log_file_path = InternetUsageLimiter.config.log_file_path
 
