@@ -11,18 +11,28 @@ require 'internet-usage-limiter'
 # pomodoro [purpose of the session #tags] [time in minutes (defaults to 10)]
 # pomodoro for the status
 
-if ARGV.empty? || ARGV.include?('--prompt')
+if ARGV.empty? || ARGV.include?('--prompt') || ARGV.include?('--bitbar')
   log = InternetUsageLimiter::LogReader.new
   if log.entries.last && log.entries.last.active?
     if ARGV.include?('--prompt')
       entry = log.entries.last
       puts "#{entry.description} (#{(entry.time_till_the_end / 60).round(2)}min) "
+    elsif ARGV.include?('--bitbar')
+      entry = log.entries.last
+      time = (entry.time_till_the_end / 60).round(2).to_s.tr('.', ':')
+      puts "#{time}s"
+      puts "---"
+      puts entry.description
     else
       puts log.entries.last
     end
   else
     exit 1
   end
+elsif ARGV.include?('--delete')
+  # TODO: Delete the last item.
+elsif ARGV.include?('--finish')
+  # TODO: Finish the last pomodoro (which will make you go offline if it was #online).
 else
   reason_and_tags = ARGV.grep(/^\D+$/).join(' ')
   minutes = ARGV.last.match(/^\d+$/) { |match| match[0].to_i } || 10
