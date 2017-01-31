@@ -1,5 +1,6 @@
 #!/bin/sh
 
+# TODO: Rewrite to Ruby, so we can parse the config and display proper from - to in the notification.
 BEFORE=$(networksetup -getairportpower en0)
 
 internet-usage-limiter.is_online.rb && /usr/sbin/networksetup -setairportpower en0 on || /usr/sbin/networksetup -setairportpower en0 off
