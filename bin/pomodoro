@@ -23,6 +23,7 @@ if ARGV.empty? || ARGV.include?('--prompt') || ARGV.include?('--bitbar')
       puts "#{time}s"
       puts "---"
       puts entry.description
+      # TODO: Show a message if not set -> so I use the shit more.
     else
       puts log.entries.last
     end
