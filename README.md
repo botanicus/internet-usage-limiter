@@ -20,3 +20,5 @@ mkdir ~/.config && tee -a ~/.config/internet-usage-limiter.yml <<EOF
  saturday_schedule: ['9:30', '18:20']
 EOF
  ```
+
+https://freedom.to/
