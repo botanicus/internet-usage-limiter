@@ -75,6 +75,10 @@ module InternetUsageLimiter
       self.finishes_at - Time.now if self.active?
     end
 
+    def overall_time
+      @line[2].match(/\d+/)[0].to_i * 60
+    end
+
     def description
       @line[3..-1].select { |word| ! word.match(/^#\w+$/) }.join(' ')
     end
@@ -85,6 +89,34 @@ module InternetUsageLimiter
 
     def to_s
       @line[1..-1].join(' ')
+    end
+  end
+
+  module Reporter
+    def self.filter_by_tags(entries, argv)
+      if argv[0] && argv[0].match(/^#(\w+)$/) # TODO: ARGV.each.
+        entries.select { |entry| entry.tags.include?($1.to_sym) }
+      else
+        entries
+      end
+    end
+
+    # {"Today" => [...entries], "Yesterday" => [...entries]}
+    def self.report(entries_with_labels)
+      entries_with_labels.each.with_index do |(label, entries), index|
+        unless entries.empty?
+          puts "\n\n" if index != 0
+          puts "=== #{label} ===\n\n"
+
+          entries_with_time_spent = entries.reduce(Hash.new(0)) do |buffer, item|
+            buffer[item.description] += item.overall_time; buffer
+          end
+
+          entries_with_time_spent.each do |description, time|
+            puts "- [#{time / 60}min] #{description}"
+          end
+        end
+      end
     end
   end
 end

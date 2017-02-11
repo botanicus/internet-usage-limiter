@@ -10,17 +10,7 @@
 
 require 'internet-usage-limiter'
 
-log = InternetUsageLimiter::LogReader.new
+entries = InternetUsageLimiter::Reporter.filter_by_tags(
+  InternetUsageLimiter::LogReader.new.day_entries, ARGV)
 
-if ARGV[0] && ARGV[0].match(/^#(\w+)$/)
-  entries = log.day_entries.select { |entry| entry.tags.include?($1.to_sym) }
-else
-  entries = log.day_entries
-end
-
-unless entries.empty?
-  puts "Today:\n\n"
-  entries.each do |entry|
-    puts "- #{entry.description}"
-  end
-end
+InternetUsageLimiter::Reporter.report('Today' => entries)
