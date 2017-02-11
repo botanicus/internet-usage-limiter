@@ -15,7 +15,7 @@ log = InternetUsageLimiter::LogReader.new
 def add_day_to_entries(day_midnight, log, buffer)
   return buffer if day_midnight > Time.now # No time travelling.
   entries = InternetUsageLimiter::Reporter.filter_by_tags(log.day_entries(day_midnight), ARGV)
-  buffer.merge(day_midnight.strftime('%d/%m/%Y') => entries)
+  buffer.merge(day_midnight.strftime('%A %d/%m/%Y') => entries)
 end
 
 monday_midnight = Time.now - ((Time.now.wday - 1) * 24 * 60 * 60) - ((Time.now.hour * 60) + Time.now.min) * 60
